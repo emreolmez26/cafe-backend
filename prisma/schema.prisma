@@ -15,13 +15,21 @@ model Category {
 }
 
 model Product {
-  id          Int         @id @default(autoincrement())
-  name        String      
-  price       Float       
-  isAvailable Boolean     @default(true) 
-  categoryId  Int         
-  category    Category    @relation(fields: [categoryId], references: [id])
-  orderItems  OrderItem[] 
+  id           Int      @id @default(autoincrement())
+  name         String
+  price        Float
+  
+  // YENİ EKLENEN TASARIM ALANLARI
+  description  String?  // Kısa açıklama (? işareti zorunlu olmadığını belirtir)
+  imageUrl     String?  // Resim linki
+  subCategory  String?  // Alt seçenek (Örn: Fast Food)
+  extraOptions String?  // Ekstra malzemeler (Örn: "Ketçap, Mayonez")
+
+  isAvailable  Boolean  @default(true) // Menüde göster/gizle butonu için
+
+  categoryId   Int
+  category     Category @relation(fields: [categoryId], references: [id])
+  orderItems   OrderItem[]
 }
 
 model Table {
